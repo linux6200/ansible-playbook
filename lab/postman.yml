@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+- hosts: localhost
+  tasks:
+    - name: Inspect postman file
+      stat: path=~/bin/Postman
+      register: postman_file
+
+    - name: Install postman
+      when: not postman_file.stat.exists
+      unarchive:
+        remote_src: yes
+        src: https://dl.pstmn.io/download/latest/linux64
+        dest: ~/bin
+

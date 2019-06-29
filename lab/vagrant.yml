@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+  - name: install role from ansible galaxy
+    local_action: command ansible-galaxy install linux6200.ansible_virtualbox
+
+  - name: install virtualbox 
+    include_role: 
+      name: linux6200.ansible_virtualbox
+
+  - name: install role from ansible galaxy
+    local_action: command ansible-galaxy install diodonfrost.vagrant
+
+  - name: install vagrant
+    include_role: 
+      name: diodonfrost.vagrant
+
