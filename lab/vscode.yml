@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+  - name: install role from ansible galaxy
+    local_action: command ansible-galaxy install gantsign.visual-studio-code
+
+  - name: install vscode
+    include_role: 
+      name: gantsign.visual-studio-code
+
+

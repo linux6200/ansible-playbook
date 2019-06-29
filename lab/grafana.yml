@@ -1,5 +1,13 @@
 
 - hosts: localhost
+  vars:
+    - panel_plugins:
+      - grafana-piechart-panel
+      - grafana-clock-panel
+    - datasource_plugins:
+      - simpod-json-datasource 
+      - grafana-simple-json-datasource
+
   tasks:
     - name: Install nessesary package
       apt: 
@@ -21,7 +29,17 @@
           name: grafana
           state: present
           update_cache: yes
-    
+
+    - name: Install - update Grafana plugins
+      grafana_plugin:
+        name: "{{ item }}"
+        version: latest
+        state: present
+      with_items:
+        - "{{ panel_plugins }}"
+        - "{{ datasource_plugins }}"
+
+
     - name: Enable and start grafana service
       service:
         name: grafana-server
