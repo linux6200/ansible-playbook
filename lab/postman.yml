@@ -2,7 +2,7 @@
 - hosts: localhost
   tasks:
     - name: Inspect postman file
-      stat: path=~/bin/Postman
+      stat: path=/usr/bin/postman
       register: postman_file
 
     - name: Install postman
@@ -10,5 +10,5 @@
       unarchive:
         remote_src: yes
         src: https://dl.pstmn.io/download/latest/linux64
-        dest: ~/bin
+        dest: /usr/bin
 

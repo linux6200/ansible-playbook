@@ -4,6 +4,12 @@
     - panel_plugins:
       - grafana-piechart-panel
       - grafana-clock-panel
+      - jdbranham-diagram-panel
+      - corpglory-progresslist-panel
+      - natel-plotly-panel
+      - grafana-polystat-panel
+      - vonage-status-panel
+      - flant-statusmap-panel
     - datasource_plugins:
       - simpod-json-datasource 
       - grafana-simple-json-datasource
