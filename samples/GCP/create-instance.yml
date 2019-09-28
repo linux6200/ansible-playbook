@@ -12,7 +12,7 @@
   tasks:
    - name: create a disk
      gcp_compute_disk:
-         name: 'disk-instance'
+         name: 'disk-instance'+"{{ vmname }}"
          size_gb: 10
          source_image: 'projects/gce-uefi-images/global/images/centos-7-v20190916'
          zone: "{{ zone }}"
