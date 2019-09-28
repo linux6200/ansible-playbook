@@ -5,14 +5,14 @@
       gcp_project: brave-reason-247406
       gcp_cred_kind: serviceaccount
       gcp_cred_file: /home/my-project.json
-      zone: "us-central1-a"
-      region: "us-central1"
+      zone: "asia-east2-b"
+      region: "asia-east2"
 
   tasks:
    - name: create a disk
      gcp_compute_disk:
          name: 'disk-instance'
-         size_gb: 50
+         size_gb: 10
          source_image: 'projects/gce-uefi-images/global/images/centos-7-v20190916'
          zone: "{{ zone }}"
          project: "{{ gcp_project }}"
