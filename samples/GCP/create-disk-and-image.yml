@@ -1,0 +1,31 @@
+- name: Create an Disk and a image
+  hosts: localhost
+  gather_facts: no
+  vars:
+      gcp_project: brave-reason-247406
+      gcp_cred_kind: serviceaccount
+      gcp_cred_file: /home/my-project.json
+      zone: "asia-south1-a"
+      region: "asia-south1"
+      vmname: "vm-test-2"
+
+  tasks:
+    - name: create a disk
+      gcp_compute_disk:
+        name: disk-image
+        size_gb: 5
+        zone: us-central1-a
+        project: "{{ gcp_project }}"
+        auth_kind: "{{ gcp_cred_kind }}"
+        service_account_file: "{{ gcp_cred_file }}"
+        state: present
+      register: disk
+
+    - name: create a image
+      gcp_compute_image:
+        name: testobject
+        source_disk: "{{ disk }}"
+        project: "{{ gcp_project }}"
+        auth_kind: "{{ gcp_cred_kind }}"
+        service_account_file: "{{ gcp_cred_file }}"
+        state: present
