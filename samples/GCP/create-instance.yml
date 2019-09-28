@@ -3,7 +3,8 @@
   gather_facts: no
   vars:
       gcp_project: my-project
-      gcp_cred_kind: serviceaccount 
+      gcp_cred_kind: serviceaccount
+      gcp_cred_file: /home/my-project.json
       zone: "us-central1-a"
       region: "us-central1"
 
