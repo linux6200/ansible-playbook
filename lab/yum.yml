@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+  - name: Install a yum package in Ansible example
+    yum:
+      name: wget
+      state: present
