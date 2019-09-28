@@ -7,6 +7,7 @@
       gcp_cred_file: /home/my-project.json
       zone: "asia-east2-b"
       region: "asia-east2"
+      vmname: "vm-test-1"
 
   tasks:
    - name: create a disk
@@ -34,7 +35,7 @@
      register: network
    - name: create a address
      gcp_compute_address:
-         name: 'address-instance'
+         name: 'address-instance'+"{{ vmname }}"
          region: "{{ region }}"
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_cred_kind }}"
@@ -46,7 +47,7 @@
    - name: create a instance
      gcp_compute_instance:
          state: present
-         name: test-vm
+         name: "{{ vmname }}"
          machine_type: n1-standard-1
          disks:
            - auto_delete: true
