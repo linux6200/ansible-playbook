@@ -77,12 +77,3 @@
      add_host: 
        hostname: "{{ address.address }}" 
        groupname: new_instances
-
-
-- name: Manage new instances
-  hosts: new_instances
-  connection: ssh
-  sudo: True
-  roles:
-    - base_configuration
-    - production_server
