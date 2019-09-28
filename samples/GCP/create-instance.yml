@@ -5,11 +5,9 @@
       gcp_project: brave-reason-247406
       gcp_cred_kind: serviceaccount
       gcp_cred_file: /home/my-project.json
-      scopes:
-        - https://www.googleapis.com/auth/compute
-      zone: "asia-east2-b"
+      zone: "asia-east2-a"
       region: "asia-east2"
-      vmname: "vm-test-1"
+      vmname: "vm-test-2"
 
   tasks:
    - name: create a disk
@@ -24,7 +22,7 @@
          scopes:
            - https://www.googleapis.com/auth/compute
          state: present
-     register: disk 
+     register: disk
    - name: create a network
      gcp_compute_network:
          name: 'network-instance'
@@ -35,17 +33,32 @@
            - https://www.googleapis.com/auth/compute
          state: present
      register: network
+   - name: create a address
+     gcp_compute_address:
+         name: "address-instance-{{ vmname }}"
+         region: "{{ region }}"
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_cred_kind }}"
+         service_account_file: "{{ gcp_cred_file }}"
+         scopes:
+           - https://www.googleapis.com/auth/compute
+         state: present
+     register: address
    - name: create a instance
      gcp_compute_instance:
          state: present
          name: "{{ vmname }}"
-         machine_type: n1-standard-1
+         machine_type: f1-micro
          disks:
            - auto_delete: true
              boot: true
-             source: "{{ disk }}" 
+             source: "{{ disk }}"
          network_interfaces:
-             - network: "{{ network }}" 
+             - network: "{{ network }}"
+               access_configs:
+                 - name: 'External NAT'
+                   nat_ip: "{{ address }}"
+                   type: 'ONE_TO_ONE_NAT'
          zone: "{{ zone }}"
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_cred_kind }}"
