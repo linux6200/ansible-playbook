@@ -5,8 +5,8 @@
       gcp_project: brave-reason-247406
       gcp_cred_kind: serviceaccount
       gcp_cred_file: /home/my-project.json
-      zone: "asia-east2-a"
-      region: "asia-east2"
+      zone: "asia-south1-a"
+      region: "asia-south1"
       vmname: "vm-test-2"
 
   tasks:
