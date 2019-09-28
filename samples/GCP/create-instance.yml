@@ -13,7 +13,7 @@
      gcp_compute_disk:
          name: 'disk-instance'
          size_gb: 50
-         source_image: 'projects/gce-uefi-images/global/images/centos-7'
+         source_image: 'projects/gce-uefi-images/global/images/centos-7-v20190916'
          zone: "{{ zone }}"
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_cred_kind }}"
